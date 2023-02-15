@@ -21,6 +21,13 @@ public class HotelHandler implements RequestHandler<String, String>,RequestStrea
         db = new Database();
         db.initDynamoDbClient();
     }
+
+    /**
+     * @Description: Adds hotel to the database with the required params: Name, City, Price, Stars
+     * @param hotelCreateRequest
+     * @param context
+     * @return
+     */
     public String handlePutHotel(String hotelCreateRequest, Context context)
     {   if(hotelCreateRequest == null){
             return "Please enter valid details to add the hotel information";
@@ -35,6 +42,14 @@ public class HotelHandler implements RequestHandler<String, String>,RequestStrea
         return db.persistData(hotel);
     }
 
+    /**
+     * @Description: Fetches a hotel from the database by its name.
+     * If not present, returns error code.
+     * @param inputStream
+     * @param outputStream
+     * @param context
+     * @throws IOException
+     */
     public void handleGetByParam(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
